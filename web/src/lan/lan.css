@@ -1,0 +1,76 @@
+/* Class colours: [data-class] sets --lan-class from the four tokens in theme.css; the node accent, the legend swatch,
+   the lens chips and the profile dot all read it. */
+[data-class='personal_family'] { --lan-class: var(--class-personal); }
+[data-class='smart_home'] { --lan-class: var(--class-smart); }
+[data-class='lcav'] { --lan-class: var(--class-lcav); }
+[data-class='search'] { --lan-class: var(--class-search); }
+.lan-class-dot { background: var(--lan-class, transparent); }
+.lan-class-bar { border-left: 4px solid var(--lan-class, var(--border)); }
+.lan-chip[aria-pressed='true'] { border-color: var(--lan-class, var(--primary)); background: color-mix(in oklab, var(--lan-class, var(--primary)) 14%, transparent); }
+
+/* The #/lan canvas. Every colour is a theme token; xyflow's own stylesheet is imported next to this one and its
+   variables are pointed at our tokens here. */
+.lan-flow {
+  --xy-edge-stroke: var(--border);
+  --xy-edge-stroke-selected: var(--primary);
+  --xy-edge-stroke-width: 1.5;
+  --xy-background-color: var(--background);
+  --xy-background-pattern-color: var(--border);
+  --xy-minimap-background-color: var(--card);
+  --xy-minimap-mask-background-color: color-mix(in oklab, var(--background) 72%, transparent);
+  --xy-minimap-mask-stroke-color: var(--border);
+  --xy-controls-button-background-color: var(--card);
+  --xy-controls-button-background-color-hover: var(--muted);
+  --xy-controls-button-color: var(--foreground);
+  --xy-controls-button-color-hover: var(--foreground);
+  --xy-controls-button-border-color: var(--border);
+  --xy-controls-box-shadow: none;
+  --xy-attribution-background-color: transparent;
+  --xy-handle-background-color: var(--border);
+  --xy-handle-border-color: var(--border);
+}
+.lan-flow .react-flow__attribution {
+  color: var(--muted-foreground);
+  font-size: 10px;
+}
+.lan-flow .react-flow__attribution a {
+  color: inherit;
+}
+.lan-flow .react-flow__minimap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.lan-flow .react-flow__controls {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.lan-flow .react-flow__handle {
+  opacity: 0;
+  pointer-events: none;
+}
+.lan-flow .react-flow__edge.lan-edge-offline .react-flow__edge-path {
+  stroke-dasharray: 4 4;
+  opacity: 0.6;
+}
+.lan-flow .react-flow__edge.lan-edge-pending .react-flow__edge-path {
+  stroke: var(--warn);
+}
+.lan-flow .react-flow__edge.lan-edge-denied .react-flow__edge-path {
+  stroke: var(--destructive);
+  opacity: 0.6;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lan-flow,
+  .lan-flow * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Pan and pinch belong to the canvas: on a touch screen (the dock as a bottom sheet) the page must not scroll under it. */
+.lan-flow {
+  touch-action: none;
+  overscroll-behavior: contain;
+}

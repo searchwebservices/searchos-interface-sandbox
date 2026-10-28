@@ -1,0 +1,98 @@
+/* Graphite palette (console/ui/sovereign.css, Bay 2026-10-25) mapped onto the shadcn variable set.
+   This is the only file in web/ that holds colour values. Triplets so alpha works: rgb(var(--g-ink) / .5). */
+
+:root {
+  color-scheme: light;
+  --g-paper: 244 245 247;
+  --g-card: 255 255 255;
+  --g-side: 235 237 240;
+  --g-border: 221 224 229;
+  --g-ink: 31 36 41;
+  --g-ink-muted: 74 82 91;
+  --g-ink-subtle: 107 115 124;
+  --g-accent: 63 107 153;
+  --g-accent-subtle: 228 236 245;
+  --g-accent-on: 255 255 255;
+  --g-ok: 61 122 90;
+  --g-warn: 143 106 30;
+  --g-danger: 166 50 50;
+  /* The Search mark colour: the dark mark on light surfaces. Lime never touches a light surface. */
+  --g-mark: 17 19 22;
+  --g-class-personal: 125 78 150;
+  --g-class-smart: 20 124 134;
+  --g-class-lcav: 168 84 34;
+  --g-class-search: 63 107 153;
+
+  --background: rgb(var(--g-paper));
+  --foreground: rgb(var(--g-ink));
+  --card: rgb(var(--g-card));
+  --card-foreground: rgb(var(--g-ink));
+  --popover: rgb(var(--g-card));
+  --popover-foreground: rgb(var(--g-ink));
+  --primary: rgb(var(--g-accent));
+  --primary-foreground: rgb(var(--g-accent-on));
+  --secondary: rgb(var(--g-side));
+  --secondary-foreground: rgb(var(--g-ink));
+  --muted: rgb(var(--g-side));
+  --muted-foreground: rgb(var(--g-ink-subtle));
+  --accent: rgb(var(--g-accent-subtle));
+  --accent-foreground: rgb(var(--g-ink));
+  --destructive: rgb(var(--g-danger));
+  --border: rgb(var(--g-border));
+  --input: rgb(var(--g-border));
+  --ring: rgb(var(--g-accent));
+  --chart-1: rgb(var(--g-accent));
+  --chart-2: rgb(var(--g-ok));
+  --chart-3: rgb(var(--g-warn));
+  --chart-4: rgb(var(--g-ink-muted));
+  --chart-5: rgb(var(--g-ink-subtle));
+  --ok: rgb(var(--g-ok));
+  --warn: rgb(var(--g-warn));
+  --class-personal: rgb(var(--g-class-personal));
+  --class-smart: rgb(var(--g-class-smart));
+  --class-lcav: rgb(var(--g-class-lcav));
+  --class-search: rgb(var(--g-class-search));
+  --radius: 0.75rem;
+  /* The kit's unit geometry and type scale (interface system v2, sections 4 and 5), so a page can
+     read as the same product as the CRM and BPE OS: the card radius, the pill, the mono face for
+     eyebrows and meta, and the eyebrow and label tracking. */
+  --radius-card: 0.875rem;
+  --radius-pill: 999px;
+  --si-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --si-eyebrow-size: 0.6667rem;
+  --si-eyebrow-track: 0.16em;
+  --si-label-size: 0.6875rem;
+  --si-label-track: 0.12em;
+  --si-title-size: clamp(1.7rem, 4.5vw, 2.15rem);
+  --sidebar: rgb(var(--g-side));
+  --sidebar-foreground: rgb(var(--g-ink));
+  --sidebar-primary: rgb(var(--g-accent));
+  --sidebar-primary-foreground: rgb(var(--g-accent-on));
+  --sidebar-accent: rgb(var(--g-accent-subtle));
+  --sidebar-accent-foreground: rgb(var(--g-ink));
+  --sidebar-border: rgb(var(--g-border));
+  --sidebar-ring: rgb(var(--g-accent));
+}
+
+.dark {
+  color-scheme: dark;
+  --g-paper: 20 23 26;
+  --g-card: 27 31 35;
+  --g-side: 16 19 22;
+  --g-border: 44 50 56;
+  --g-ink: 228 232 236;
+  --g-ink-muted: 180 188 196;
+  --g-ink-subtle: 142 151 160;
+  --g-accent: 127 166 207;
+  --g-accent-subtle: 34 50 68;
+  --g-accent-on: 15 24 34;
+  --g-ok: 134 194 160;
+  --g-warn: 209 175 104;
+  --g-danger: 226 128 128;
+  /* Brand lime on dark. */
+  --g-mark: 217 255 42;
+  --g-class-personal: 192 150 214;
+  --g-class-smart: 108 190 200;
+  --g-class-lcav: 226 155 108;
+  --g-class-search: 127 166 207;
+}

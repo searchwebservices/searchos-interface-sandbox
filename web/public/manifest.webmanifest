@@ -1,0 +1,17 @@
+{
+  "name": "SearchOS",
+  "short_name": "SearchOS",
+  "description": "Sovereign's console: lanes, Gilfoyle, the LAN, the Library and the devices.",
+  "id": "/v2/",
+  "start_url": "/v2/",
+  "scope": "/v2/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14171a",
+  "theme_color": "#14171a",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

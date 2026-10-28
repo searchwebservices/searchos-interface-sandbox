@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "command_output",
+  "description": "A command and what it printed. Inline: compact terminal. Surface: full terminal with tabs.",
+  "type": "object",
+  "required": ["command", "stdout", "stderr", "exit"],
+  "properties": {
+    "command": { "type": "string", "maxLength": 4000 },
+    "stdout": { "type": "string", "maxLength": 200000 },
+    "stderr": { "type": "string", "maxLength": 200000 },
+    "exit": { "type": ["integer", "null"] },
+    "cwd": { "type": "string", "maxLength": 1000 },
+    "host": { "type": "string", "maxLength": 200 }
+  }
+}

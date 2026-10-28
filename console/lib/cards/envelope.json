@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "card",
+  "description": "The card object of docs/cards-spec.md section 1. data is checked against schemas/<kind>.json.",
+  "type": "object",
+  "required": ["id", "kind", "lane", "data", "provenance", "actions", "state", "at"],
+  "properties": {
+    "id": { "type": "string", "maxLength": 200 },
+    "kind": { "type": "string", "maxLength": 60 },
+    "lane": { "type": "string", "maxLength": 80 },
+    "data": { "type": "object" },
+    "provenance": {
+      "type": "object",
+      "required": ["source", "at"],
+      "properties": {
+        "source": { "type": "string", "enum": ["tool", "recall", "research", "person"] },
+        "tool": { "type": "string", "maxLength": 100 },
+        "run_id": { "type": "string", "maxLength": 200 },
+        "message_id": { "type": "string", "maxLength": 200 },
+        "refs": { "type": "array", "items": { "type": "object", "required": ["label"], "properties": { "label": { "type": "string", "maxLength": 200 }, "href": { "type": "string", "maxLength": 1000 }, "path": { "type": "string", "maxLength": 1000 } } } },
+        "at": { "type": "string", "maxLength": 40 }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "kind"],
+        "properties": {
+          "id": { "type": "string", "maxLength": 60 },
+          "label": { "type": "string", "maxLength": 60 },
+          "kind": { "type": "string", "enum": ["open", "approve", "deny", "ack", "copy", "download", "retry", "submit", "run"] },
+          "scope": { "type": "string", "enum": ["owner", "member"] },
+          "target": { "type": "string", "maxLength": 200 },
+          "auto": { "type": "boolean" }
+        }
+      }
+    },
+    "state": { "type": "string", "enum": ["open", "done", "ack", "stale"] },
+    "at": { "type": "string", "maxLength": 40 }
+  }
+}

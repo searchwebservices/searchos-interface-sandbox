@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "alert",
+  "description": "Something a person should know. Raised once, acknowledged by a person, never re-raised while open.",
+  "type": "object",
+  "required": ["severity", "title", "body", "source"],
+  "properties": {
+    "severity": { "type": "string", "enum": ["info", "warn", "critical"] },
+    "title": { "type": "string", "maxLength": 160 },
+    "body": { "type": "string", "maxLength": 4000 },
+    "source": { "type": "string", "maxLength": 200 },
+    "since": { "type": "string", "maxLength": 40 }
+  }
+}

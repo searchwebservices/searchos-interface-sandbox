@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+        />
+        <meta name="google" content="notranslate" />
+        <link rel="manifest" href="/v2/apps/crm/manifest.json" />
+                <title>SearchOS CRM</title>
+        <link rel="icon" href="/v2/apps/crm/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/svg+xml" href="/v2/apps/crm/favicon.svg" />
+        <link rel="apple-touch-icon" href="/v2/apps/crm/apple-touch-icon.png" />
+    </head>
+
+    <body>
+        <noscript> You need to enable JavaScript to run this app. </noscript>
+        <div id="root"></div>
+    </body>
+    <script>
+        const getUrlParams = () => {
+            const urlSearchParams = new URLSearchParams(
+                window.location.hash.substring(1)
+            );
+            const access_token = urlSearchParams.get('access_token');
+            const refresh_token = urlSearchParams.get('refresh_token');
+            const type = urlSearchParams.get('type');
+
+            return { access_token, refresh_token, type };
+        };
+
+        function interceptAuthCallback() {
+                const hash = window.location.hash;
+                const {access_token, refresh_token, type} = getUrlParams();
+                window.location.href = `./#/auth-callback?access_token=${access_token}&refresh_token=${refresh_token}&type=${type}`;
+        }
+    
+        // Call the function to intercept the auth callback
+        interceptAuthCallback();
+    </script>
+</html>

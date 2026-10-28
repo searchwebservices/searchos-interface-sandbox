@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "tool_run",
+  "description": "One agent turn with its tools. The stored run item of console/lib/events.js.",
+  "type": "object",
+  "required": ["message_id", "status", "tools"],
+  "properties": {
+    "message_id": { "type": "string", "maxLength": 200 },
+    "agent": { "type": ["string", "null"], "maxLength": 100 },
+    "model": { "type": ["string", "null"], "maxLength": 200 },
+    "started": { "type": "number" },
+    "ended": { "type": ["number", "null"] },
+    "status": { "type": "string", "enum": ["running", "done", "failed", "interrupted"] },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "status"],
+        "properties": {
+          "id": { "type": "string", "maxLength": 200 },
+          "name": { "type": "string", "maxLength": 100 },
+          "input_summary": { "type": "string", "maxLength": 2000 },
+          "status": { "type": "string", "enum": ["running", "ok", "failed"] },
+          "started": { "type": "number" },
+          "ended": { "type": "number" },
+          "output_excerpt": { "type": "string", "maxLength": 4000 }
+        }
+      }
+    }
+  }
+}

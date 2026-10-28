@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "metrics_snapshot",
+  "description": "Numbers with a recent trend. trend is the series for `window`; series maps more window names to their own numbers. The surface offers only the windows present here.",
+  "type": "object",
+  "required": ["title", "metrics"],
+  "properties": {
+    "title": { "type": "string", "maxLength": 160 },
+    "window": { "type": "string", "maxLength": 40 },
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["label", "value"],
+        "properties": {
+          "label": { "type": "string", "maxLength": 120 },
+          "value": { "type": ["string", "number"], "maxLength": 80 },
+          "unit": { "type": "string", "maxLength": 24 },
+          "trend": { "type": "array", "items": { "type": "number" } },
+          "series": { "type": "object" },
+          "status": { "type": "string", "enum": ["ok", "warn", "critical"] }
+        }
+      }
+    }
+  }
+}

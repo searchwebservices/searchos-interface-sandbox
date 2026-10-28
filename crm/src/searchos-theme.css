@@ -1,0 +1,594 @@
+/* ============================================================================
+   SearchOS skin for Atomic CRM. Loaded after index.css.
+
+   The CRM wears the Search Interface System v2 (Hard Line 6). Surface, border
+   and ink triplets mirror the console (sovereignos/web/src/lib/theme.css) so
+   the iframe and the Money page match; accent, ok/warn/danger stay the kit's
+   values, copied from
+   brand-marketing/brand/design-system/kit/search-interface.css, light and
+   dark. Warm paper, cards lighter than the page, purple accent on light and
+   lime on dark, the kit's radii (cards .875rem, choice tiles .75rem, pills
+   999px) and its type roles. The shadcn variables are mapped from the tokens,
+   so every Atomic component reads them without a patch. This is the ONE file
+   in the app that holds colour literals. Montserrat is the content face
+   (Bay), IBM Plex Mono the eyebrow and meta face, both self-hosted (SIL OFL
+   1.1, licences beside the files).
+
+   The theme switch is the .dark class on <html> (Atomic's theme provider and
+   the console through postMessage). Nothing else in src/ carries a colour.
+   ============================================================================ */
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assets/fonts/montserrat-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./assets/fonts/ibm-plex-mono-500-latin.woff2") format("woff2");
+}
+
+/* ── Tokens: the kit's light values ──────────────────────────────────────── */
+:root {
+  color-scheme: light;
+  /* Surfaces, borders and ink mirror the console's :root in
+     sovereignos/web/src/lib/theme.css (Bay 2026-10-27: same surface as the
+     Money page). A palette change there is one edit here. */
+  --g-paper: 244 245 247; /* console --g-paper (page, top bar, art panels) */
+  --g-card: 255 255 255; /* console --g-card */
+  --g-side: 235 237 240; /* console --g-side (--muted, --sidebar) */
+  --g-border: 221 224 229; /* console --g-border */
+  --g-ink: 31 36 41; /* console --g-ink */
+  --g-ink-muted: 74 82 91; /* console --g-ink-muted */
+  --g-ink-subtle: 107 115 124; /* console --g-ink-subtle */
+  --g-accent: 129 37 217;
+  --g-accent-subtle: 235 222 238;
+  --g-accent-on: 255 255 255;
+  --g-ok: 22 101 74;
+  --g-warn: 138 96 20;
+  --g-danger: 155 42 30;
+  --g-shade: 0 0 0;
+  /* Fixed backdrops behind the logo previews in Settings: a light logo is shown
+     on dark paper and a dark logo on light paper, in either theme. */
+  --logo-preview-light: rgb(244 242 236);
+  --logo-preview-dark: rgb(19 15 21);
+  --sos-font:
+    Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+  --si-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --si-tap: max(44px, 2.75rem);
+  --si-ease: cubic-bezier(0.22, 0.7, 0.3, 1);
+}
+
+/* ── Tokens: the kit's dark values. Lime never touches a light surface. ──── */
+.dark,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  /* Mirrors the console's .dark block in sovereignos/web/src/lib/theme.css. */
+  --g-paper: 20 23 26; /* console --g-paper */
+  --g-card: 27 31 35; /* console --g-card */
+  --g-side: 16 19 22; /* console --g-side */
+  --g-border: 44 50 56; /* console --g-border */
+  --g-ink: 228 232 236; /* console --g-ink */
+  --g-ink-muted: 180 188 196; /* console --g-ink-muted */
+  --g-ink-subtle: 142 151 160; /* console --g-ink-subtle */
+  --g-accent: 217 255 42;
+  --g-accent-subtle: 35 34 23;
+  --g-accent-on: 0 0 0;
+  --g-ok: 74 199 155;
+  --g-warn: 224 179 84;
+  --g-danger: 240 122 105;
+  --g-shade: 0 0 0;
+}
+
+/* ── shadcn variables, mapped from the tokens ─────────────────────────────── */
+:root,
+.dark,
+:root[data-theme="dark"] {
+  --radius: 0.875rem; /* the kit's card radius; buttons and chips are pills below */
+
+  --background: rgb(var(--g-paper));
+  --foreground: rgb(var(--g-ink));
+  --card: rgb(var(--g-card));
+  --card-foreground: rgb(var(--g-ink));
+  --popover: rgb(var(--g-card));
+  --popover-foreground: rgb(var(--g-ink));
+
+  /* Primary is the one filled accent: the main action. */
+  --primary: rgb(var(--g-accent));
+  --primary-foreground: rgb(var(--g-accent-on));
+
+  --muted: rgb(var(--g-side));
+  --muted-foreground: rgb(var(--g-ink-subtle));
+  --secondary: var(--muted);
+  --secondary-foreground: rgb(var(--g-ink));
+  /* shadcn "accent" is the hover and selection tint: a hint, never a fill. */
+  --accent: rgb(var(--g-accent-subtle));
+  --accent-foreground: rgb(var(--g-ink));
+
+  --destructive: rgb(var(--g-danger));
+  --border: rgb(var(--g-border));
+  --input: rgb(var(--g-border));
+  --ring: rgb(var(--g-accent));
+
+  --chart-1: rgb(var(--g-accent));
+  --chart-2: rgb(var(--g-ok));
+  --chart-3: rgb(var(--g-warn));
+  --chart-4: rgb(var(--g-ink-muted));
+  --chart-5: rgb(var(--g-ink-subtle));
+
+  --sidebar: rgb(var(--g-side));
+  --sidebar-foreground: rgb(var(--g-ink));
+  --sidebar-primary: rgb(var(--g-accent));
+  --sidebar-primary-foreground: rgb(var(--g-accent-on));
+  --sidebar-accent: rgb(var(--g-accent-subtle));
+  --sidebar-accent-foreground: rgb(var(--g-ink));
+  --sidebar-border: rgb(var(--g-border));
+  --sidebar-ring: rgb(var(--g-accent));
+
+  /* Dashboard deals chart */
+  --chart-won: rgb(var(--g-ok));
+  --chart-pending: color-mix(in srgb, rgb(var(--g-ok)) 45%, rgb(var(--g-card)));
+  --chart-lost: rgb(var(--g-danger));
+
+  /* Note statuses (dots) */
+  --note-cold: rgb(var(--g-ink-subtle));
+  --note-warm: rgb(var(--g-warn));
+  --note-hot: rgb(var(--g-danger));
+  --note-in-contract: rgb(var(--g-ok));
+
+  /* Tag chips: tints of the tokens over the card, so ink reads on all of them. */
+  --tag-1: color-mix(in srgb, rgb(var(--g-accent)) 18%, rgb(var(--g-card)));
+  --tag-2: color-mix(in srgb, rgb(var(--g-ok)) 18%, rgb(var(--g-card)));
+  --tag-3: color-mix(in srgb, rgb(var(--g-warn)) 18%, rgb(var(--g-card)));
+  --tag-4: color-mix(in srgb, rgb(var(--g-danger)) 18%, rgb(var(--g-card)));
+  --tag-5: color-mix(in srgb, rgb(var(--g-ink-muted)) 14%, rgb(var(--g-card)));
+  --tag-6: color-mix(in srgb, rgb(var(--g-accent)) 32%, rgb(var(--g-card)));
+  --tag-7: color-mix(in srgb, rgb(var(--g-ok)) 32%, rgb(var(--g-card)));
+  --tag-8: color-mix(in srgb, rgb(var(--g-warn)) 32%, rgb(var(--g-card)));
+  --tag-9: color-mix(in srgb, rgb(var(--g-danger)) 32%, rgb(var(--g-card)));
+  --tag-10: color-mix(in srgb, rgb(var(--g-ink-muted)) 28%, rgb(var(--g-card)));
+
+  /* Avatar backgrounds */
+  --avatar-0: var(--tag-1);
+  --avatar-1: var(--tag-2);
+  --avatar-2: var(--tag-3);
+  --avatar-3: var(--tag-4);
+  --avatar-4: var(--tag-5);
+  --avatar-5: var(--tag-6);
+  --avatar-6: var(--tag-7);
+  --avatar-7: var(--tag-8);
+  --avatar-8: var(--tag-9);
+  --avatar-9: var(--tag-10);
+}
+
+/* ── Density: the console can post { type: "density", value } ────────────────
+   Sizes are rem, so the root font-size scales type, padding and gaps together.
+   Specificity beats the mobile html rule in index.css. */
+:root[data-density="small"] {
+  font-size: 14px;
+}
+:root[data-density="medium"] {
+  font-size: 15px;
+}
+:root[data-density="large"] {
+  font-size: 17px;
+}
+:root[data-density="enormous"] {
+  font-size: 20px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--g-accent));
+  outline-offset: 2px;
+}
+
+/* ── Type roles (kit section 4), Montserrat for content, Plex Mono for the
+   eyebrow and meta lines. Shared by Home, the StepFrame and the lists. ───── */
+.si-eyebrow {
+  font-family: var(--si-mono);
+  font-weight: 500;
+  font-size: 0.6667rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(var(--g-accent));
+}
+.si-label {
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--g-ink-subtle));
+}
+.si-title {
+  font-weight: 500;
+  font-size: clamp(1.7rem, 4.5vw, 2.15rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: rgb(var(--g-ink));
+  text-wrap: balance;
+  margin-top: 0.75rem;
+}
+.si-title:focus {
+  outline: none;
+}
+.si-lede {
+  font-size: 1rem;
+  line-height: 1.625;
+  color: rgb(var(--g-ink-muted));
+  max-width: 46ch;
+  margin-top: 1rem;
+  text-wrap: pretty;
+}
+.si-meta {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: rgb(var(--g-ink-muted));
+}
+.si-mono {
+  font-family: var(--si-mono);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.si-src {
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: rgb(var(--g-ink-subtle));
+}
+
+/* ── Kit geometry over shadcn: pills for buttons and badges, hairline cards
+   with no shadow, inputs with the kit's focus ring. Where Atomic's own
+   classes fight the kit, these win by specificity, not by !important. ─────── */
+[data-slot="button"] {
+  border-radius: 999px;
+  box-shadow: none;
+  transition:
+    opacity 0.18s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+[data-slot="button"]:hover {
+  box-shadow: none;
+}
+/* Primary: the one filled accent per screen state. Hover dims, never recolours. */
+[data-slot="button"].bg-primary:hover {
+  background-color: rgb(var(--g-accent));
+  opacity: 0.9;
+}
+/* Secondary (outline): transparent, ink text, hairline; hover darkens the hairline. */
+[data-slot="button"].border {
+  background: transparent;
+  border-color: rgb(var(--g-border));
+  color: rgb(var(--g-ink));
+}
+[data-slot="button"].border:hover {
+  background: transparent;
+  border-color: rgb(var(--g-ink-muted));
+  color: rgb(var(--g-ink));
+}
+/* Quiet (ghost): text only, ink-muted to ink on hover, no tint block. */
+[data-slot="button"]:where(
+  :not(.bg-primary):not(.border):not(.bg-destructive):not(.bg-secondary)
+) {
+  color: rgb(var(--g-ink-muted));
+}
+[data-slot="button"]:where(
+    :not(.bg-primary):not(.border):not(.bg-destructive):not(.bg-secondary)
+  ):hover {
+  color: rgb(var(--g-ink));
+  background: rgb(var(--g-border) / 0.35);
+}
+[data-slot="badge"] {
+  border-radius: 999px;
+  font-size: 0.7333rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding-inline: 0.6rem;
+}
+[data-slot="card"] {
+  box-shadow: none;
+  border-color: rgb(var(--g-border));
+}
+[data-slot="input"],
+[data-slot="textarea"],
+[data-slot="select-trigger"] {
+  border-radius: 0.6rem;
+  background: rgb(var(--g-card));
+  box-shadow: none;
+}
+[data-slot="input"]:focus-visible,
+[data-slot="textarea"]:focus-visible,
+[data-slot="select-trigger"]:focus-visible {
+  outline: none;
+  border-color: rgb(var(--g-accent));
+  box-shadow: 0 0 0 3px rgb(var(--g-accent) / 0.18);
+}
+[data-slot="checkbox"] {
+  border-radius: 0.3rem;
+}
+[data-slot="dropdown-menu-content"],
+[data-slot="popover-content"],
+[data-slot="dialog-content"],
+[data-slot="sheet-content"] {
+  box-shadow: 0 1rem 2.4rem rgb(var(--g-shade) / 0.18);
+  border-color: rgb(var(--g-border));
+}
+
+/* ── The top bar: sticky, paper at .94 with a blur, a hairline under it. ─── */
+.sos-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1010;
+  background: rgb(var(--g-paper) / 0.94);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgb(var(--g-border));
+}
+.sos-crumbs {
+  font-size: 0.85rem;
+}
+.sos-crumbs a {
+  color: rgb(var(--g-ink-muted));
+  text-decoration: none;
+  min-height: var(--si-tap);
+  display: inline-flex;
+  align-items: center;
+}
+.sos-crumbs a:hover {
+  color: rgb(var(--g-ink));
+}
+.sos-crumbs [aria-current="page"] {
+  color: rgb(var(--g-ink));
+  font-weight: 500;
+}
+
+/* ── Home: one question, three big Choice tiles (the BPE OS home pattern).
+   Tiles are the kit's Choice made large: hairline card, .75rem radius inside
+   a 1rem tile, an illustration panel on the page paper, title, one line,
+   then a mono meta line with the arrow. Hover lights the hairline in accent,
+   the arrow nudges; the whole tile is the link. ─────────────────────────── */
+.hm-head {
+  padding-top: 1.25rem;
+}
+.hm-tiles {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+@media (min-width: 60rem) {
+  .hm-tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.hm-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-height: 100%;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgb(var(--g-border));
+  background: rgb(var(--g-card));
+  color: inherit;
+  text-decoration: none;
+  text-align: left;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.hm-tile:hover {
+  border-color: rgb(var(--g-accent));
+}
+.hm-tile:focus-visible {
+  outline: 2px solid rgb(var(--g-accent));
+  outline-offset: 3px;
+}
+.hm-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  margin-bottom: 0.75rem;
+  padding: 0.9rem;
+  border: 1px solid rgb(var(--g-border));
+  border-radius: 0.75rem;
+  background: rgb(var(--g-paper));
+  color: rgb(var(--g-accent));
+  overflow: hidden;
+}
+.hm-art svg {
+  width: 100%;
+  height: 100%;
+  max-width: 13rem;
+  display: block;
+}
+.hm-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgb(var(--g-ink));
+  text-wrap: balance;
+}
+.hm-note {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgb(var(--g-ink-muted));
+}
+.hm-meta {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  font-family: var(--si-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: rgb(var(--g-ink-muted));
+  font-variant-numeric: tabular-nums;
+}
+.hm-meta.is-pending {
+  color: rgb(var(--g-ink-subtle));
+}
+.hm-go {
+  display: inline-grid;
+  place-items: center;
+  color: rgb(var(--g-accent));
+  transition: transform 0.2s ease;
+}
+.hm-go svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.hm-tile:hover .hm-go,
+.hm-tile:focus-visible .hm-go {
+  transform: translateX(0.25rem);
+}
+/* Enormous density: the tiles stack one per row sooner so the art panel
+   never gets absurdly wide beside two siblings. */
+:root[data-density="enormous"] .hm-tiles {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+}
+
+/* ── Kanban: the stage heading is a kit Label, the total a mono meta line,
+   cards hairline on the card surface with no shadow, a drop target tints. ── */
+.sos-col-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 0 0.35rem;
+}
+.sos-col-total {
+  font-family: var(--si-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: rgb(var(--g-ink-muted));
+  font-variant-numeric: tabular-nums;
+}
+.sos-col-drop {
+  border-radius: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+.sos-col-drop.is-over {
+  background: rgb(var(--g-accent-subtle));
+}
+.sos-deal-card {
+  border-radius: 0.75rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.sos-deal-card:hover {
+  border-color: rgb(var(--g-ink-muted));
+}
+.sos-deal-card.is-dragging {
+  border-color: rgb(var(--g-accent));
+  box-shadow: 0 0.6rem 1.8rem rgb(var(--g-shade) / 0.14);
+}
+
+/* ── Empty states: one sentence of why plus the one action that fills it. ─ */
+.sos-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.sos-empty .si-lede {
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+/* ── Loading and empty states: the Search mark, token colours only ───────── */
+.boot-loader,
+.sos-mark-loader-fill {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boot-loader {
+  background-color: rgb(var(--g-paper));
+  color: rgb(var(--g-ink-subtle));
+}
+
+.boot-mark,
+.sos-mark-pulse {
+  width: 4.5rem;
+  height: 4.5rem;
+  animation: sos-mark-pulse 1.8s ease-in-out infinite;
+}
+
+.sos-mark-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  color: rgb(var(--g-ink-subtle));
+}
+
+.sos-mark-loader:not(.sos-mark-loader-fill) .sos-mark-pulse {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.sos-empty-mark {
+  width: 5rem;
+  height: 5rem;
+  color: rgb(var(--g-ink-subtle));
+  opacity: 0.45;
+}
+
+@keyframes sos-mark-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-mark,
+  .sos-mark-pulse {
+    animation: none;
+    opacity: 0.8;
+  }
+  .hm-go,
+  .hm-tile,
+  .sos-deal-card {
+    transition: none;
+  }
+  .hm-tile:hover .hm-go,
+  .hm-tile:focus-visible .hm-go {
+    transform: none;
+  }
+}

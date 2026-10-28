@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "result_summary",
+  "description": "The completion card: what was checked and what was observed.",
+  "type": "object",
+  "required": ["title", "checks", "observed"],
+  "properties": {
+    "title": { "type": "string", "maxLength": 200 },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["label", "ok"],
+        "properties": {
+          "label": { "type": "string", "maxLength": 300 },
+          "ok": { "type": "boolean" },
+          "note": { "type": "string", "maxLength": 2000 }
+        }
+      }
+    },
+    "observed": { "type": "array", "items": { "type": "string", "maxLength": 1000 } }
+  }
+}

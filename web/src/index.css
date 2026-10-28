@@ -1,0 +1,234 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "./lib/theme.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Self-hosted open-licence fonts (SIL OFL 1.1, licence files beside them in public/fonts). Latin subset, variable weight.
+   No CDN. The profile page picks one of three: the system sans stack, Montserrat or Space Grotesk. */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/montserrat-latin-wght-normal.woff2') format('woff2-variations'), url('/fonts/montserrat-latin-wght-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-latin-wght-normal.woff2') format('woff2-variations'), url('/fonts/space-grotesk-latin-wght-normal.woff2') format('woff2');
+}
+:root {
+  --sov-stack-system: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --sov-font: Montserrat, var(--sov-stack-system);
+}
+:root[data-font='system'] {
+  --sov-font: var(--sov-stack-system);
+}
+:root[data-font='montserrat'] {
+  --sov-font: Montserrat, var(--sov-stack-system);
+}
+:root[data-font='space-grotesk'] {
+  --sov-font: 'Space Grotesk', var(--sov-stack-system);
+}
+
+/* Reduced motion: the operating system setting applies unless the person chose to allow motion; the profile can also force it. */
+:root[data-motion='reduce'] *,
+:root[data-motion='reduce'] *::before,
+:root[data-motion='reduce'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='allow']) *,
+  :root:not([data-motion='allow']) *::before,
+  :root:not([data-motion='allow']) *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: var(--sov-font);
+    --color-ok: var(--ok);
+    --color-warn: var(--warn);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+/* The kit's type roles (interface system v2, section 4) on the theme tokens: the eyebrow, the page
+   title, the label, the source line. Colours and sizes all come from lib/theme.css. */
+.si-eyebrow {
+  font-family: var(--si-mono);
+  font-weight: 500;
+  font-size: var(--si-eyebrow-size);
+  letter-spacing: var(--si-eyebrow-track);
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.si-title {
+  font-weight: 500;
+  font-size: var(--si-title-size);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  text-wrap: balance;
+  margin-top: 0.75rem;
+}
+.si-label {
+  font-weight: 600;
+  font-size: var(--si-label-size);
+  letter-spacing: var(--si-label-track);
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.si-src {
+  font-size: var(--si-label-size);
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.si-mono {
+  font-family: var(--si-mono);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+/* The kit card: hairline, card surface, .875rem radius, no shadow. */
+.si-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+/* The kit pill: a tag or a chip. */
+.si-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  padding: 0.12rem 0.6rem;
+  font-size: 0.7333rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* Find in thread: painted by the CSS Custom Highlight API (src/thread/Find.tsx). */
+::highlight(find-match) {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+::highlight(find-current) {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Phones (under 768 px): the app behaves like a native one. Desktop is untouched: every rule below is inside the query. */
+@media (max-width: 767.98px) {
+  html,
+  body {
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  #root {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  /* 16 px keeps iOS from zooming into a field. */
+  input,
+  textarea,
+  select,
+  [contenteditable='true'] {
+    font-size: 16px;
+  }
+  /* 44 px tap targets where thumbs live: headers, sheets, dialogs, the composer, lane rows, menus. */
+  header [data-slot='button'],
+  header [role='combobox'],
+  footer [data-slot='button'],
+  [data-slot='sheet-content'] [data-slot='button'],
+  [data-slot='dialog-content'] [data-slot='button'],
+  [data-slot='alert-dialog-content'] [data-slot='button'],
+  [data-testid='composer-drop'] [data-slot='button'],
+  [data-testid='composer-drop'] button,
+  [data-sidebar='menu-button'],
+  [data-slot='dropdown-menu-item'],
+  [data-slot='context-menu-item'],
+  [data-slot='command-item'] {
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+  }
+  /* Nothing wider than the screen: long words wrap, code and tables scroll inside their own box. */
+  [data-id] {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  pre,
+  table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+}

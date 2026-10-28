@@ -1,0 +1,768 @@
+{
+  "tool_run": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "kind": "tool_run",
+      "lane": "hardware",
+      "data": {
+        "message_id": "msg_1",
+        "agent": "gilfoyle",
+        "model": null,
+        "started": 1761472800000,
+        "ended": 1761472803000,
+        "status": "done",
+        "tools": [
+          {
+            "id": "t1",
+            "name": "bash",
+            "input_summary": "ls registry",
+            "status": "ok",
+            "started": 1761472800100,
+            "ended": 1761472800900,
+            "output_excerpt": "ports.md"
+          },
+          {
+            "id": "t2",
+            "name": "read",
+            "input_summary": "registry/ports.md",
+            "status": "ok",
+            "started": 1761472801000,
+            "ended": 1761472801100
+          }
+        ]
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "copy",
+          "label": "Copy",
+          "kind": "copy"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "kind": "tool_run",
+      "lane": "hardware",
+      "data": {
+        "message_id": "msg_1",
+        "status": "finished",
+        "tools": "bash"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "copy",
+          "label": "Copy",
+          "kind": "copy"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "command_output": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000003",
+      "kind": "command_output",
+      "lane": "hardware",
+      "data": {
+        "command": "ss -tlnp",
+        "stdout": "LISTEN 0 511 127.0.0.1:4100",
+        "stderr": "",
+        "exit": 0,
+        "cwd": "/home/sovereign/sovereignos",
+        "host": "lenovo"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "copy",
+          "label": "Copy",
+          "kind": "copy"
+        },
+        {
+          "id": "retry",
+          "label": "Retry",
+          "kind": "retry",
+          "scope": "owner"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "kind": "command_output",
+      "lane": "hardware",
+      "data": {
+        "command": "ss -tlnp",
+        "stdout": "x",
+        "exit": "zero"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "copy",
+          "label": "Copy",
+          "kind": "copy"
+        },
+        {
+          "id": "retry",
+          "label": "Retry",
+          "kind": "retry",
+          "scope": "owner"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "metrics_snapshot": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000005",
+      "kind": "metrics_snapshot",
+      "lane": "hardware",
+      "data": {
+        "title": "Box health",
+        "window": "1h",
+        "metrics": [
+          {
+            "label": "CPU",
+            "value": 42,
+            "unit": "%",
+            "trend": [
+              30,
+              35,
+              41,
+              38,
+              42
+            ],
+            "series": {
+              "24h": [
+                20,
+                25,
+                30,
+                33,
+                42
+              ],
+              "7d": [
+                22,
+                24,
+                31,
+                28,
+                42
+              ]
+            },
+            "status": "ok"
+          },
+          {
+            "label": "Memory",
+            "value": 11.2,
+            "unit": "GB",
+            "trend": [
+              10,
+              10.4,
+              10.9,
+              11,
+              11.2
+            ],
+            "status": "warn"
+          },
+          {
+            "label": "Disk",
+            "value": "71",
+            "unit": "%",
+            "trend": [
+              70,
+              70,
+              71,
+              71,
+              71
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000006",
+      "kind": "metrics_snapshot",
+      "lane": "hardware",
+      "data": {
+        "title": "Box health",
+        "metrics": [
+          {
+            "label": "CPU",
+            "value": 42,
+            "status": "fine"
+          }
+        ]
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "approval": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000007",
+      "kind": "approval",
+      "lane": "hardware",
+      "data": {
+        "request_id": "per_1",
+        "action": "shell",
+        "resources": [
+          "git push origin main"
+        ],
+        "message": "Push the console fix.",
+        "scope": {
+          "host": "lenovo",
+          "command_class": "systemctl",
+          "always_allowed": false
+        }
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "approve",
+          "label": "Approve",
+          "kind": "approve",
+          "scope": "owner"
+        },
+        {
+          "id": "deny",
+          "label": "Deny",
+          "kind": "deny",
+          "scope": "owner"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000008",
+      "kind": "approval",
+      "lane": "hardware",
+      "data": {
+        "action": "shell",
+        "scope": "once"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "approve",
+          "label": "Approve",
+          "kind": "approve",
+          "scope": "owner"
+        },
+        {
+          "id": "deny",
+          "label": "Deny",
+          "kind": "deny",
+          "scope": "owner"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "file_retrieval": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000009",
+      "kind": "file_retrieval",
+      "lane": "hardware",
+      "data": {
+        "files": [
+          {
+            "name": "ports.md",
+            "path": "registry/ports.md",
+            "kind": "doc",
+            "size": 1840,
+            "lane": "hardware",
+            "hash": "sha256:ab12",
+            "summary": "Listening ports on the Lenovo."
+          },
+          {
+            "name": "harness.md",
+            "path": "book/harness.md",
+            "kind": "doc",
+            "size": 52000,
+            "lane": "hardware"
+          }
+        ]
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        },
+        {
+          "id": "download",
+          "label": "Download",
+          "kind": "download"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000010",
+      "kind": "file_retrieval",
+      "lane": "hardware",
+      "data": {
+        "files": [
+          {
+            "name": "ports.md",
+            "path": "registry/ports.md",
+            "kind": "doc",
+            "size": "big",
+            "lane": "hardware"
+          }
+        ]
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        },
+        {
+          "id": "download",
+          "label": "Download",
+          "kind": "download"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "requested_input": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000011",
+      "kind": "requested_input",
+      "lane": "hardware",
+      "data": {
+        "id": "form_1",
+        "title": "Three questions",
+        "fields": [
+          {
+            "key": "rack_label",
+            "type": "string",
+            "title": "What is on the rack label?"
+          }
+        ],
+        "metadata": null
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "submit",
+          "label": "Submit",
+          "kind": "submit",
+          "scope": "member"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000012",
+      "kind": "requested_input",
+      "lane": "hardware",
+      "data": {
+        "id": "form_1",
+        "title": "Three questions",
+        "fields": []
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "submit",
+          "label": "Submit",
+          "kind": "submit",
+          "scope": "member"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "config_diff": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000013",
+      "kind": "config_diff",
+      "lane": "hardware",
+      "data": {
+        "target": "registry/ports.md",
+        "before": "| 8800 | LAN |",
+        "after": "| 8800 | LAN |\n| 8801 | loopback |",
+        "unified": "@@ -1 +1,2 @@\n | 8800 | LAN |\n+| 8801 | loopback |",
+        "reason": "Internal card channel."
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "approve",
+          "label": "Approve",
+          "kind": "approve",
+          "scope": "owner"
+        },
+        {
+          "id": "deny",
+          "label": "Deny",
+          "kind": "deny",
+          "scope": "owner"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000014",
+      "kind": "config_diff",
+      "lane": "hardware",
+      "data": {
+        "target": "registry/ports.md",
+        "before": 12,
+        "after": "x"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "approve",
+          "label": "Approve",
+          "kind": "approve",
+          "scope": "owner"
+        },
+        {
+          "id": "deny",
+          "label": "Deny",
+          "kind": "deny",
+          "scope": "owner"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "alert": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000015",
+      "kind": "alert",
+      "lane": "hardware",
+      "data": {
+        "severity": "warn",
+        "title": "Disk at 91 percent",
+        "body": "The backup volume is nearly full.",
+        "source": "lenovo-watch",
+        "since": "2026-10-26T10:00:00.000Z"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "ack",
+          "label": "Acknowledge",
+          "kind": "ack",
+          "scope": "member"
+        },
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000016",
+      "kind": "alert",
+      "lane": "hardware",
+      "data": {
+        "severity": "urgent",
+        "title": "Disk",
+        "body": "x",
+        "source": "lenovo-watch"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "bash",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "ack",
+          "label": "Acknowledge",
+          "kind": "ack",
+          "scope": "member"
+        },
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "script": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000021",
+      "kind": "script",
+      "lane": "dm-bay",
+      "data": {
+        "target": "lenovo",
+        "cwd": "/home/sovereign/sovereignos",
+        "language": "bash",
+        "code": "uptime\ndf -h /",
+        "executable": true,
+        "permissions": [
+          "shell: uptime",
+          "shell: df"
+        ]
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "card",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        },
+        {
+          "id": "copy",
+          "label": "Copy",
+          "kind": "copy"
+        },
+        {
+          "id": "run",
+          "label": "Run",
+          "kind": "run",
+          "scope": "owner"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000022",
+      "kind": "script",
+      "lane": "dm-bay",
+      "data": {
+        "target": "lenovo",
+        "cwd": "/tmp",
+        "language": "bash",
+        "executable": "yes",
+        "permissions": "shell"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "card",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  },
+  "result_summary": {
+    "valid": {
+      "id": "00000000-0000-4000-8000-000000000023",
+      "kind": "result_summary",
+      "lane": "dm-bay",
+      "data": {
+        "title": "Switch uplink check",
+        "checks": [
+          {
+            "label": "Link is up",
+            "ok": true,
+            "note": "1000Mb/s full duplex"
+          },
+          {
+            "label": "No packet loss",
+            "ok": false,
+            "note": "2 percent over 100 pings"
+          }
+        ],
+        "observed": [
+          "enp2s0 carrier up",
+          "uptime 12 days"
+        ]
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "card",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    },
+    "invalid": {
+      "id": "00000000-0000-4000-8000-000000000024",
+      "kind": "result_summary",
+      "lane": "dm-bay",
+      "data": {
+        "title": "Empty",
+        "checks": [
+          {
+            "label": "No flag"
+          }
+        ],
+        "observed": "none"
+      },
+      "provenance": {
+        "source": "tool",
+        "tool": "card",
+        "run_id": "call_1",
+        "message_id": "msg_1",
+        "at": "2026-10-26T10:00:00.000Z"
+      },
+      "actions": [
+        {
+          "id": "open",
+          "label": "Open",
+          "kind": "open"
+        }
+      ],
+      "state": "open",
+      "at": "2026-10-26T10:00:00.000Z"
+    }
+  }
+}
