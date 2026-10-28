@@ -5,6 +5,8 @@ it looks in a fresh project. Everything visual is here: the shell and sidebar, c
 Money, Library, LAN, Devices, Health, Profile, Cmd K, plus the CRM source. No server code. When it runs, it borrows the real console on
 the Lenovo through your SSH tunnel, so you see your real lanes, messages and data while you work on visuals.
 
+Read `GROUNDING.md` first: how Search actually uses the CRM and the PM day to day. UI notes are judged against it.
+
 This is a sandbox. Nothing here deploys. Bring changes back to Jared and they get ported into the real tree.
 
 ## Layout
